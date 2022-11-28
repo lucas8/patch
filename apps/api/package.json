@@ -5,6 +5,9 @@
   "main": "src/app.ts",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "build": "yarn clean && tsc",
+    "start": "node dist/app",
+    "clean": "rm -rf dist",
     "lint": "TIMING=1 eslint \"**/*.ts*\""
   },
   "dependencies": {
