@@ -1,5 +1,0 @@
-{
-  "extends": "@patch/tsconfig/ui.json",
-  "include": ["."],
-  "exclude": ["dist", "build", "node_modules"]
-}

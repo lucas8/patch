@@ -1,12 +1,9 @@
 {
   "name": "@patch/tsconfig",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
-  "sideEffects": false,
-  "files": [
-    "base.json",
-    "nextjs.json",
-    "api.json",
-    "ui.json"
-  ]
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
 }

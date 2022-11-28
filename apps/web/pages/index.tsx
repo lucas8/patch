@@ -1,10 +1,8 @@
-import { Button } from '@patch/ui'
-
 export default function Web() {
   return (
     <div>
       <h1>Web</h1>
-      <Button />
+      <button>test</button>
     </div>
   )
 }

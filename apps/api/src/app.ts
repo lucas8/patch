@@ -5,7 +5,7 @@ import morgan from 'morgan'
 import cors from 'cors'
 import { inferAsyncReturnType, initTRPC } from '@trpc/server'
 import * as trpcExpress from '@trpc/server/adapters/express'
-import { serverConfig } from '@patch/config'
+import { connectDB } from '@patch/db'
 
 dotenv.config({ path: path.join(__dirname, './.env') })
 
@@ -32,7 +32,7 @@ if (process.env.NODE_ENV !== 'production') app.use(morgan('dev'))
 
 app.use(
   cors({
-    origin: [serverConfig.origin, 'http://localhost:3000'],
+    origin: process.env.ORIGIN || 'http://localhost:3000',
     credentials: true,
   }),
 )
@@ -44,9 +44,10 @@ app.use(
   }),
 )
 
-app.listen(serverConfig.port, () => {
-  console.log(`🚀 Server listening on port 8000`)
+const port = process.env.PORT || 8080
+app.listen(port, () => {
+  console.log(`🚀 Server listening on port ${port}`)
 
   // CONNECT DB
-  // connectDB()
+  connectDB()
 })
