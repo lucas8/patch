@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@patch/web",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -12,13 +12,13 @@
     "next": "13.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "ui": "*"
+    "@patch/ui": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "eslint": "7.32.0",
-    "eslint-config-custom": "*",
-    "tsconfig": "*",
+    "@patch/eslint-config-custom": "*",
+    "@patch/tsconfig": "*",
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",

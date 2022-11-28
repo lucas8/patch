@@ -1,0 +1,5 @@
+{
+  "extends": "@patch/tsconfig/api.json",
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}

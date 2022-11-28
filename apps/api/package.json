@@ -1,0 +1,28 @@
+{
+  "name": "@patch/api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "lint": "TIMING=1 eslint \"**/*.ts*\""
+  },
+  "dependencies": {
+    "@prisma/client": "^4.6.1",
+    "@trpc/server": "^10.0.0-rc.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "redis": "^4.5.1"
+  },
+  "devDependencies": {
+    "@patch/tsconfig": "*",
+    "@patch/config": "*",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.14",
+    "@types/morgan": "^1.9.3",
+    "@types/node": "^18.11.9",
+    "morgan": "^1.10.0",
+    "prisma": "^4.6.1",
+    "ts-node-dev": "^2.0.0"
+  }
+}
