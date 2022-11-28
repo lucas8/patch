@@ -17,7 +17,7 @@
     "generate": "turbo run generate",
     "db:migrate:deploy": "turbo run db:migrate:deploy",
     "db:push": "turbo run db:push",
-    "db:start": "pscale connect patch initial-setup --port 3309"
+    "db:start": "pscale connect patch dev --port 3309"
   },
   "devDependencies": {
     "prettier": "latest",
