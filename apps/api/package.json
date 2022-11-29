@@ -5,9 +5,8 @@
   "main": "src/app.ts",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
-    "build": "yarn clean && tsc",
-    "start": "node dist/app",
-    "clean": "rm -rf dist",
+    "build": "rimraf dist && swc ./src -d dist",
+    "start": "node dist/app.js",
     "lint": "TIMING=1 eslint \"**/*.ts*\""
   },
   "dependencies": {
@@ -19,6 +18,9 @@
     "@patch/db": "*"
   },
   "devDependencies": {
+    "@swc/cli": "^0.1.55",
+    "@swc/core": "^1.2.127",
+    "rimraf": "^3.0.2",
     "@patch/tsconfig": "*",
     "@patch/config": "*",
     "@types/cors": "^2.8.12",

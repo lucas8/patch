@@ -1,8 +1,9 @@
 {
   "extends": "@patch/tsconfig/node16.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "lib": ["ESNext"]
   },
-  "include": ["**/*.ts"],
+  "include": ["src"],
   "exclude": ["node_modules"]
 }
