@@ -1,13 +1,13 @@
 {
   "name": "@patch/api",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "main": "src/app.ts",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "build": "rimraf dist && swc ./src -d dist",
     "start": "node dist/app.js",
-    "lint": "TIMING=1 eslint \"**/*.ts*\""
+    "lint": "eslint \"**/*.ts*\""
   },
   "dependencies": {
     "@trpc/server": "^10.0.0-rc.5",
