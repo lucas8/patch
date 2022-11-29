@@ -1,0 +1,10 @@
+services:
+  - type: web
+    env: node
+    name: patch-api
+    repo: https://github.com/lucas8/patch.git
+    buildFilter:
+      paths:
+        - apps/backend/**
+    buildCommand: yarn && yarn build --filter=api
+    startCommand: cd apps/api; yarn start
