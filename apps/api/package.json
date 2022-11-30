@@ -1,33 +1,35 @@
 {
-  "name": "@patch/api",
-  "version": "1.0.0",
-  "private": true,
-  "main": "src/app.ts",
-  "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
-    "build": "rimraf dist && swc ./src -d dist",
-    "start": "node dist/app.js",
-    "lint": "eslint \"**/*.ts*\""
-  },
-  "dependencies": {
-    "@trpc/server": "^10.0.0-rc.5",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "redis": "^4.5.1",
-    "@patch/db": "*"
-  },
-  "devDependencies": {
-    "@swc/cli": "^0.1.55",
-    "@swc/core": "^1.2.127",
-    "rimraf": "^3.0.2",
-    "@patch/tsconfig": "*",
-    "@patch/config": "*",
-    "@types/cors": "^2.8.12",
-    "@types/express": "^4.17.14",
-    "@types/morgan": "^1.9.3",
-    "@types/node": "^18.11.9",
-    "morgan": "^1.10.0",
-    "ts-node-dev": "^2.0.0"
-  }
+	"name": "@patch/api",
+	"version": "1.0.0",
+	"private": true,
+	"main": "src/app.ts",
+	"scripts": {
+		"dev": "ts-node-dev --respawn --transpile-only --deps src/app.ts",
+		"build": "rimraf dist && swc ./src -d dist",
+		"start": "node dist/app.js",
+		"lint": "eslint \"**/*.ts*\""
+	},
+	"dependencies": {
+		"@patch/db": "*",
+		"@patch/trpc": "*",
+		"@trpc/server": "^10.4.2",
+		"cors": "^2.8.5",
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"redis": "^4.5.1"
+	},
+	"devDependencies": {
+		"@patch/config": "*",
+		"@patch/tsconfig": "*",
+		"@swc/cli": "^0.1.55",
+		"@swc/core": "^1.2.127",
+		"@types/cors": "^2.8.12",
+		"@types/dotenv": "^8.2.0",
+		"@types/express": "^4.17.14",
+		"@types/morgan": "^1.9.3",
+		"@types/node": "^18.11.9",
+		"morgan": "^1.10.0",
+		"rimraf": "^3.0.2",
+		"ts-node-dev": "^2.0.0"
+	}
 }

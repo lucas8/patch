@@ -1,9 +1,8 @@
 {
-  "name": "@patch/tsconfig",
-  "version": "1.0.0",
-  "private": true,
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@patch/tsconfig",
+	"version": "1.0.0",
+	"private": true,
+	"publishConfig": {
+		"access": "public"
+	}
 }

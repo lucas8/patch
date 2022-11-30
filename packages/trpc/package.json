@@ -1,0 +1,20 @@
+{
+	"name": "@patch/trpc",
+	"version": "1.0.0",
+	"main": "src/index.ts",
+	"scripts": {
+		"dev": "tsup --watch",
+		"build": "tsup",
+		"lint": "TIMING=1 eslint \"src/**/*.ts\""
+	},
+	"dependencies": {
+		"@patch/db": "*",
+		"@trpc/server": "^10.4.2",
+		"zod": "^3.19.1"
+	},
+	"devDependencies": {
+		"@patch/tsconfig": "*",
+		"tsup": "^5.11.13",
+		"eslint": "^8.12.0"
+	}
+}

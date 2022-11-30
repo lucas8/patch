@@ -1,25 +1,27 @@
 {
-  "$schema": "https://turbo.build/schema.json",
-  "globalEnv": ["NODE_ENV", "DATABASE_URL", "PORT", "NEXT_PUBLIC_ORIGIN"],
-  "pipeline": {
-    "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"]
-    },
-    "db:migrate:deploy": {
-      "outputs": []
-    },
-    "db:push": {
-      "outputs": []
-    },
-    "dev": {
-      "cache": false
-    },
-    "generate": {
-      "dependsOn": ["^generate"]
-    },
-    "lint": {
-      "outputs": []
-    }
-  }
+	"$schema": "https://turbo.build/schema.json",
+	"globalEnv": ["NODE_ENV", "DATABASE_URL", "PORT", "WEB_ORIGIN", "API_URL"],
+
+	"globalDependencies": [".env"],
+	"pipeline": {
+		"build": {
+			"dependsOn": ["^build"],
+			"outputs": [".svelte-kit/**", ".vercel/**"]
+		},
+		"db:migrate:deploy": {
+			"outputs": []
+		},
+		"db:push": {
+			"outputs": []
+		},
+		"dev": {
+			"cache": false
+		},
+		"generate": {
+			"dependsOn": ["^generate"]
+		},
+		"lint": {
+			"outputs": []
+		}
+	}
 }
