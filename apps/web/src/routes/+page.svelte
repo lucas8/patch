@@ -1,12 +1,7 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { trpc } from '../lib/trpc';
+	import type { PageData } from './$types';
 
-	let result = '';
-
-	onMount(async () => {
-		result = await trpc.hello.hello.query('lucas');
-	});
+	export let data: PageData;
 </script>
 
-<pre>{result}</pre>
+<pre>{data.hello}</pre>
