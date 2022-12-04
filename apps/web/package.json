@@ -13,13 +13,16 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"dependencies": {
-		"trpc-sveltekit": "^3.0.2"
+		"superjson": "^1.11.0",
+		"trpc-sveltekit": "^3.0.2",
+		"ws": "^8.11.0"
 	},
 	"devDependencies": {
 		"@patch/config": "*",
 		"@patch/trpc": "*",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
+		"@types/ws": "^8.5.3",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
 		"svelte": "^3.53.1",

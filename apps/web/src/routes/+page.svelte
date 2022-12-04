@@ -1,7 +1,18 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import Canvas from '$lib/components/canvas.svelte';
 
-	export let data: PageData;
+	let name = '';
+	let showCanvas = false;
 </script>
 
-<pre>{data.hello}</pre>
+{#if showCanvas}
+	<Canvas {name} />
+{:else}
+	<form on:submit|preventDefault={() => (showCanvas = true)}>
+		<div>
+			<label for="name">Name:</label>
+			<input id="name" bind:value={name} />
+		</div>
+		<button type="submit">Submit</button>
+	</form>
+{/if}
