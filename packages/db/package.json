@@ -17,8 +17,8 @@
 		"format": "prisma format",
 		"generate": "prisma generate",
 		"lint": "TIMING=1 eslint \"src/**/*.ts\"",
-		"prebuild": "npm run generate",
-		"predev": "npm run generate",
+		"prebuild": "yarn generate",
+		"predev": "yarn generate",
 		"studio": "prisma studio"
 	},
 	"dependencies": {

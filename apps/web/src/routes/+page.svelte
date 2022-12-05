@@ -1,18 +1,16 @@
 <script lang="ts">
-	import Canvas from '$lib/components/canvas.svelte';
+	import Space from '$lib/components/space.svelte';
+	import Cursors from '$lib/components/cursors.svelte';
 
-	let name = '';
-	let showCanvas = false;
+	let uid = Date.now().toString(36);
+
+	const addBlock = () => {
+		console.log('test');
+	};
 </script>
 
-{#if showCanvas}
-	<Canvas {name} />
-{:else}
-	<form on:submit|preventDefault={() => (showCanvas = true)}>
-		<div>
-			<label for="name">Name:</label>
-			<input id="name" bind:value={name} />
-		</div>
-		<button type="submit">Submit</button>
-	</form>
-{/if}
+<Space {uid}>
+	<Cursors {uid} />
+
+	<button on:click={addBlock}>add block</button>
+</Space>

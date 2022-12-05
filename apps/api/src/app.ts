@@ -23,6 +23,7 @@ app.use(
 		credentials: true
 	})
 );
+
 app.use(
 	'/api/trpc',
 	createExpressMiddleware({
