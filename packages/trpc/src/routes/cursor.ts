@@ -7,16 +7,16 @@ import { t } from '../t';
 const ee = new EventEmitter();
 
 type MousePos = {
-	name: string;
+	uid: string;
 	x: number;
 	y: number;
 };
 
 export const cursorRouter = t.router({
-	cursorListen: t.procedure.input(z.object({ name: z.string() })).subscription(({ input }) => {
+	cursorListen: t.procedure.input(z.object({ uid: z.string() })).subscription(({ input }) => {
 		return observable<MousePos>((emit) => {
 			const onAdd = (data: MousePos) => {
-				// if (data.name === input.name) return;
+				// if (data.uid === input.uid) return;
 
 				emit.next(data);
 			};
@@ -29,9 +29,9 @@ export const cursorRouter = t.router({
 		});
 	}),
 	cursorMove: t.procedure
-		.input(z.object({ x: z.number(), y: z.number(), name: z.string() }))
+		.input(z.object({ x: z.number(), y: z.number(), uid: z.string() }))
 		.mutation(async ({ input }) => {
-			const pos: MousePos = { x: input.x, y: input.y, name: input.name };
+			const pos: MousePos = { x: input.x, y: input.y, uid: input.uid };
 			ee.emit('cursorMove', pos);
 
 			return true;
