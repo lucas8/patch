@@ -32,6 +32,7 @@ app.use(
 	})
 );
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handler = applyWSSHandler({ wss, router, createContext: createContext as any });
 
 server.listen(port, () => {
