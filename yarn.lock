@@ -332,12 +332,12 @@
     "@swc/core-win32-ia32-msvc" "1.3.20"
     "@swc/core-win32-x64-msvc" "1.3.20"
 
-"@trpc/client@^10.4.1":
-  version "10.4.2"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.4.2.tgz#7ab8decd9b876d8d6a8ab4de9494c344d7e3d738"
-  integrity sha512-E21TTmFN8bWYWrZk4nDaNsOUektL8I1ASvToSzOIys9X7iF/IRZ6H8CNdTZtQ3k6K7kvcDAu/8SlPuqZRgFvsg==
+"@trpc/client@^10.4.3":
+  version "10.4.3"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.4.3.tgz#a0d9963481ac3ac6f3939f827654cdaa3a0c5fda"
+  integrity sha512-VMdyLHr6PG2FlMxnbPt/6jniDBxv3Ys1hFhk0AriFDD9h4Lg9fznwGn5RI1eV5RCOAoCQ/+ZwPMSKOMBhiycTw==
 
-"@trpc/server@^10.4.1", "@trpc/server@^10.4.2":
+"@trpc/server@^10.4.2":
   version "10.4.2"
   resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.4.2.tgz#d56fc919ca080d588ad46cc951ab88246f15dcf3"
   integrity sha512-/DO7fwIHjKmZ4QawYVbmJnPzTdtTRQR1qrVgQNYf8YlqygQe6xPlPjBQK47iIi1G5fveXhgKFG8SQjNDP3vaDQ==
@@ -3218,14 +3218,6 @@ tree-kill@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/tree-kill/-/tree-kill-1.2.2.tgz#4ca09a9092c88b73a7cdc5e8a01b507b0790a0cc"
   integrity sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==
-
-trpc-sveltekit@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/trpc-sveltekit/-/trpc-sveltekit-3.0.2.tgz#0d1d17f7d272b610ec2a2b1741404eabdede4b73"
-  integrity sha512-5JyynEYuc4/v7kHF37lMUaztTqXrCDjxeazk608BXwkDN9xomkiQtUHqk1pv/PAXn8oSXW8C/AUnnrz8uParcw==
-  dependencies:
-    "@trpc/client" "^10.4.1"
-    "@trpc/server" "^10.4.1"
 
 ts-interface-checker@^0.1.9:
   version "0.1.13"

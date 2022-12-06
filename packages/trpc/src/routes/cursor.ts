@@ -12,7 +12,7 @@ type MousePos = {
 	y: number;
 };
 
-export const cursorsRouter = t.router({
+export const cursorRouter = t.router({
 	list: t.procedure.input(z.object({ uid: z.string() })).subscription(({ input }) => {
 		return observable<MousePos>((emit) => {
 			const onAdd = (data: MousePos) => {

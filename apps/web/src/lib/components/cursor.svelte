@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
 	import { spring } from 'svelte/motion';
 
 	export let x: number;

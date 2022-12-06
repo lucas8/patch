@@ -14,9 +14,9 @@
 	},
 	"dependencies": {
 		"@sveltejs/adapter-vercel": "^1.0.0-next.84",
+		"@trpc/client": "^10.4.3",
 		"lodash": "^4.17.21",
 		"superjson": "^1.11.0",
-		"trpc-sveltekit": "^3.0.2",
 		"ws": "^8.11.0"
 	},
 	"devDependencies": {
