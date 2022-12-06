@@ -1,10 +1,10 @@
 import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server';
 import { t } from './t';
 
-import { cursorRouter } from './routes';
+import { cursorsRouter } from './routes';
 
 export const router = t.router({
-	cursorRouter
+	cursors: cursorsRouter
 });
 
 export type Router = typeof router;

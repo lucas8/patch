@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-    previewFeatures = ["referentialIntegrity"]
+  previewFeatures = ["referentialIntegrity"]
 
 }
 
@@ -17,6 +17,8 @@ datasource db {
 model User{
   @@map(name: "users")
 
-  id String  @id @default(uuid())
-  name String  @db.VarChar(255)
+  id            String   @id @default(uuid())
+  name          String   
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
 }
