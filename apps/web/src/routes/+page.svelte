@@ -1,16 +1,24 @@
 <script lang="ts">
-	import Space from '$lib/components/space.svelte';
+	import { plugins } from '$lib/stores/plugins';
+	import Canvas from '$lib/components/canvas.svelte';
 	import Cursors from '$lib/components/cursors.svelte';
-
-	let uid = Date.now().toString(36);
+	import Modules from '$lib/components/plugins.svelte';
 
 	const addBlock = () => {
-		console.log('test');
+		$plugins = [{ x: 0, y: 0, width: 300, height: 200 }, ...$plugins];
 	};
 </script>
 
-<Space {uid}>
-	<Cursors {uid} />
+<Canvas>
+	<Cursors />
+
+	<Modules />
 
 	<button on:click={addBlock}>add block</button>
-</Space>
+</Canvas>
+
+<style>
+	button {
+		pointer-events: auto;
+	}
+</style>

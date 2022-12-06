@@ -1,1 +1,1 @@
-export { cursorRouter } from './cursor';
+export { cursorsRouter } from './cursors';
