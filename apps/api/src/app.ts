@@ -32,7 +32,7 @@ app.use(
 	})
 );
 
-const handler = applyWSSHandler({ wss, router, createContext });
+const handler = applyWSSHandler({ wss, router, createContext: createContext as any });
 
 server.listen(port, () => {
 	console.log(`🚀 Server listening on port ${port}`);
