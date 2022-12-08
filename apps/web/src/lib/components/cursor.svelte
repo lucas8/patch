@@ -4,6 +4,7 @@
 	export let x: number;
 	export let y: number;
 
+	// TODO: cursor left canvas
 	let coords = spring(
 		{ x, y },
 		{

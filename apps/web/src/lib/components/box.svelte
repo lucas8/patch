@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { width as windowWidth, height as windowHeight } from '$lib/stores/canvas';
+	import { trpc } from '$lib/trpc';
 	import type { TBox } from '$lib/types';
 
 	export let box: TBox;
@@ -9,6 +10,14 @@
 	let height = 400;
 
 	const handleMouseup = () => {
+		if (isDragging) {
+			trpc.sync.create.mutate({
+				action: 'U',
+				boxId: box.id,
+				data: { x: box.x, y: box.y }
+			});
+		}
+
 		isDragging = false;
 	};
 

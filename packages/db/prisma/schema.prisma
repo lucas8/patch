@@ -2,14 +2,13 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider             = "mysql"
-  url                  = env("DATABASE_URL")
-  referentialIntegrity = "prisma"
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 // Just using this as a proof of concept 
@@ -19,20 +18,25 @@ model Box {
   x Float
   y Float
 
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  createdAt  DateTime     @default(now()) @map(name: "created_at")
+  updatedAt  DateTime     @updatedAt @map(name: "updated_at")
+  SyncUpdate SyncUpdate[]
 }
 
 model SyncUpdate {
   id String @id @default(uuid())
 
-  modelType String
-  modelId   String
-  action    String
-  changeset Json
+  action String
+  boxId  String
+  Box    Box    @relation(fields: [boxId], references: [id])
+
+  // Duplicate fields on box
+  x Float
+  y Float
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
+  @@index(boxId)
   @@map(name: "sync_update")
 }

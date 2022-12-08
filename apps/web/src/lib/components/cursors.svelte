@@ -9,7 +9,7 @@
 	let cursors: Record<string, { x: number; y: number; uid: string }> = {};
 
 	onMount(() => {
-		subscription = trpc.cursor.list.subscribe(
+		subscription = trpc.cursor.listen.subscribe(
 			{ uid: $uid },
 			{
 				onError: console.log,
