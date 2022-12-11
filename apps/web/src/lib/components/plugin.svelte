@@ -1,8 +1,14 @@
 <script lang="ts">
+	import { document } from '$lib/stores/document';
 	import type { TPlugin } from '$lib/types';
-	import { width as windowWidth, height as windowHeight } from '$lib/stores/canvas';
 
+	const [doc] = document();
+
+	export let idx: number;
 	export let plugin: TPlugin;
+
+	const width = 200;
+	const height = 200;
 
 	let isDragging = false;
 
@@ -16,21 +22,21 @@
 
 	const handleMousemove = (e: MouseEvent) => {
 		if (isDragging) {
-			plugin.x = Math.max(Math.min(plugin.x + e.movementX, $windowWidth - width), 0);
-			plugin.y = Math.max(Math.min(plugin.y + e.movementY, $windowHeight - height), 0);
+			doc.update((newDoc) => {
+				newDoc.nodes[idx].x = Math.max(plugin.x + e.movementX, 0);
+				newDoc.nodes[idx].y = Math.max(plugin.y + e.movementY, 0);
+			});
 		}
 	};
-
-	$: ({ x, y, width, height } = plugin);
 </script>
 
 <svelte:window on:mouseup={handleMouseup} on:mousemove={handleMousemove} />
 
 <article
-	style="left: {x}px; top: {y}px; width: {width}px; height: {height}px"
+	style="left: {plugin.x}px; top: {plugin.y}px; width: {width}px; height: {height}px"
 	on:mousedown={handleMousedown}
 >
-	i am a card!
+	<pre>Type: {plugin.type}</pre>
 </article>
 
 <style>

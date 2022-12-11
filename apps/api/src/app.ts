@@ -40,11 +40,12 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on('CLIENT_SYNC', (data) => {
+		let isBootstrap = false;
 		const tmpSyncMsg = Buffer.from(data.syncMessage, 'base64');
 
 		if (!syncStates[peerId]) {
-			// If the client is not already tracked, we create a new entry in our list and initiate a SyncState
 			syncStates[peerId] = Automerge.initSyncState();
+			isBootstrap = true;
 		}
 
 		// If the client is already tracked
@@ -60,31 +61,14 @@ io.on('connection', (socket) => {
 		syncStates[peerId] = nextSyncState;
 		doc = nextDoc;
 
-		genSyncMessage(peerId);
+		updatePeers(isBootstrap ? undefined : peerId);
 	});
 });
 
-const genSyncMessage = (peerId: string) => {
-	const [nextSyncState, syncMessage] = Automerge.generateSyncMessage(doc, syncStates[peerId]);
-
-	// If the client is indeed out of sync and needs an update
-	if (syncMessage) {
-		console.log(Buffer.from(syncMessage).toString('base64'));
-
-		io.to(peerId).emit('UPDATE_SYNC_STATE', {
-			syncMessage: Buffer.from(syncMessage).toString('base64')
-		});
-	}
-
-	syncStates[peerId] = nextSyncState;
-};
-
-const updatePeers = (fromPeerId: string) => {
-	Object.keys(syncStates).map((peerIdKey) => {
+const updatePeers = (fromPeerId?: string) => {
+	Object.keys(syncStates).forEach((peerIdKey) => {
 		// We don't want to send a message to the client that just sent us an update
 		if (fromPeerId && fromPeerId === peerIdKey) return;
-
-		let tmpState = null;
 
 		try {
 			const [nextSyncState, syncMessage] = Automerge.generateSyncMessage(
@@ -94,21 +78,16 @@ const updatePeers = (fromPeerId: string) => {
 
 			// If the client is indeed out of sync and needs an update
 			if (syncMessage) {
-				console.log(Buffer.from(syncMessage).toString('base64'));
+				console.log('sending message to', peerIdKey);
 
-				io.to(peerIdKey).emit('update', {
+				io.to(peerIdKey).emit('UPDATE_SYNC_STATE', {
 					syncMessage: Buffer.from(syncMessage).toString('base64')
 				});
 			}
 
-			tmpState = nextSyncState;
+			syncStates[peerIdKey] = nextSyncState;
 		} catch (e) {
 			console.log(e);
-		}
-
-		// There we update the synchronisation state of the client if he needed an update
-		if (tmpState) {
-			syncStates[peerIdKey] = tmpState;
 		}
 	});
 };

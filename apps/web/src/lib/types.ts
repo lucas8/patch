@@ -1,14 +1,16 @@
-import type { Counter, Int, Text } from '@automerge/automerge';
+import type { Doc } from '@automerge/automerge';
 
 export type TPlugin = {
+	type: string;
 	x: number;
 	y: number;
-	width: number;
-	height: number;
 };
 
+// TODO: rename this
 export type PluginDoc = {
-	version: Counter;
-	name: Text;
-	nodes: { type: Text; x: Int; y: Int }[];
+	version: number;
+	name: string;
+	nodes: TPlugin[];
 };
+
+export type TDoc = Doc<PluginDoc>;
