@@ -33,12 +33,6 @@ const syncStates: Record<string, Automerge.SyncState> = {};
 io.on('connection', (socket) => {
 	const peerId = socket.id;
 
-	socket.on('disconnect', function () {
-		console.log('Got disconnect!');
-
-		delete syncStates[peerId];
-	});
-
 	socket.on('CLIENT_SYNC', (data) => {
 		let isBootstrap = false;
 		const tmpSyncMsg = Buffer.from(data.syncMessage, 'base64');
@@ -63,6 +57,12 @@ io.on('connection', (socket) => {
 
 		updatePeers(isBootstrap ? undefined : peerId);
 	});
+
+	socket.on('disconnect', function () {
+		console.log('Got disconnect!');
+
+		delete syncStates[peerId];
+	});
 });
 
 const updatePeers = (fromPeerId?: string) => {
@@ -78,8 +78,6 @@ const updatePeers = (fromPeerId?: string) => {
 
 			// If the client is indeed out of sync and needs an update
 			if (syncMessage) {
-				console.log('sending message to', peerIdKey);
-
 				io.to(peerIdKey).emit('UPDATE_SYNC_STATE', {
 					syncMessage: Buffer.from(syncMessage).toString('base64')
 				});

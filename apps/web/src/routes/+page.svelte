@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Plugin from '$lib/components/plugin.svelte';
 	import { io } from '$lib/io';
-	import { document } from '$lib/stores/document';
+	import { document, sendSyncMessage, recieveSyncMessage } from '$lib/stores/document';
 	import { onMount } from 'svelte';
 
-	const [doc, sendSyncMessage, recieveSyncMessage] = document();
+	const doc = document();
 
 	onMount(() => {
 		io.on('connect', () => {
@@ -12,7 +12,7 @@
 		});
 
 		io.on('UPDATE_SYNC_STATE', (data: { syncMessage: string }) => {
-			recieveSyncMessage($doc, data.syncMessage);
+			recieveSyncMessage(data.syncMessage);
 		});
 	});
 

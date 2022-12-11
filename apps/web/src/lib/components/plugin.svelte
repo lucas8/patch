@@ -2,7 +2,7 @@
 	import { document } from '$lib/stores/document';
 	import type { TPlugin } from '$lib/types';
 
-	const [doc] = document();
+	const doc = document();
 
 	export let idx: number;
 	export let plugin: TPlugin;
