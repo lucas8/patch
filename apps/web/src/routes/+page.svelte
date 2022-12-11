@@ -1,21 +1,43 @@
 <script lang="ts">
-	import { plugins } from '$lib/stores/plugins';
-	import Canvas from '$lib/components/canvas.svelte';
-	import Cursors from '$lib/components/cursors.svelte';
-	import Modules from '$lib/components/plugins.svelte';
+	import Plugin from '$lib/components/plugin.svelte';
+	import { io } from '$lib/io';
+	import { document } from '$lib/stores/document';
+	import { onMount } from 'svelte';
+
+	const [doc, sendSyncMessage, recieveSyncMessage] = document();
+
+	onMount(() => {
+		io.on('connect', () => {
+			sendSyncMessage($doc);
+		});
+
+		io.on('UPDATE_SYNC_STATE', (data: { syncMessage: string }) => {
+			recieveSyncMessage($doc, data.syncMessage);
+		});
+	});
+
+	const changeName = () => {
+		doc.update((doc) => {
+			doc.name = 'lucas';
+		});
+	};
 
 	const addBlock = () => {
-		$plugins = [{ x: 0, y: 0, width: 300, height: 200 }, ...$plugins];
+		doc.update((doc) => {
+			doc.nodes.push({ type: 'plugin', x: 0, y: 0 });
+		});
 	};
 </script>
 
-<Canvas>
-	<Cursors />
+<h1>Name: {$doc.name}</h1>
+<button on:click={changeName}>change name</button>
+<button on:click={addBlock}>add block</button>
 
-	<Modules />
-
-	<button on:click={addBlock}>add block</button>
-</Canvas>
+{#if $doc && $doc.nodes && $doc.nodes.length > 0}
+	{#each $doc.nodes as plugin, idx}
+		<Plugin {plugin} {idx} />
+	{/each}
+{/if}
 
 <style>
 	button {
