@@ -8,7 +8,7 @@
 		const x = event.pageX;
 		const y = event.pageY;
 
-		trpc.cursors.save.mutate({ x, y, uid: $uid });
+		// trpc.cursors.save.mutate({ x, y, uid: $uid });
 	}, 50);
 
 	const handleResize = () => {

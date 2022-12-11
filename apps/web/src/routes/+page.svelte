@@ -1,12 +1,29 @@
 <script lang="ts">
-	import { plugins } from '$lib/stores/plugins';
 	import Canvas from '$lib/components/canvas.svelte';
 	import Cursors from '$lib/components/cursors.svelte';
 	import Modules from '$lib/components/plugins.svelte';
+	import { io } from '$lib/io';
+	import { setupRootDocument } from '$lib/stores/automerge';
+	import { onMount } from 'svelte';
+	import { Text } from '@automerge/automerge';
+
+	const [doc, sendSyncMessage] = setupRootDocument();
+
+	onMount(() => {
+		io.on('connect', () => {
+			sendSyncMessage($doc);
+		});
+	});
 
 	const addBlock = () => {
-		$plugins = [{ x: 0, y: 0, width: 300, height: 200 }, ...$plugins];
+		doc.update((doc) => {
+			doc.name = new Text('lucas');
+		});
 	};
+
+	$: {
+		console.log($doc.name);
+	}
 </script>
 
 <Canvas>
