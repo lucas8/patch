@@ -10,10 +10,9 @@
 		"lint": "eslint \"**/*.ts*\""
 	},
 	"dependencies": {
+		"@patch/lib": "*",
 		"@automerge/automerge": "^2.0.1-alpha.2",
 		"@patch/db": "*",
-		"@patch/trpc": "*",
-		"@trpc/server": "^10.4.2",
 		"cors": "^2.8.5",
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",

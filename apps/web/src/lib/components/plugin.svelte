@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { document } from '$lib/stores/document';
-	import type { TPlugin } from '$lib/types';
+	import type { TFrontendDocNode } from '@patch/lib';
 
 	const doc = document();
 
 	export let idx: number;
-	export let plugin: TPlugin;
+	export let plugin: TFrontendDocNode;
 
 	const width = 200;
 	const height = 200;

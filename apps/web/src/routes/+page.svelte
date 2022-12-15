@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Patch from '$lib/components/patch.svelte';
 	import Plugin from '$lib/components/plugin.svelte';
 	import { io } from '$lib/io';
 	import { document, sendSyncMessage, recieveSyncMessage } from '$lib/stores/document';
@@ -33,8 +32,6 @@
 <h1>Name: {$doc.name}</h1>
 <button on:click={changeName}>change name</button>
 <button on:click={addBlock}>add block</button>
-
-<Patch />
 
 <div>
 	{#if $doc && $doc.nodes && $doc.nodes.length > 0}

@@ -1,15 +1,15 @@
 import { writable } from 'svelte/store';
 import * as AutoMerge from '@automerge/automerge';
 import { io } from '$lib/io';
-import type { PluginDoc, TDoc } from '$lib/types';
 import { convertDataURIToBinary, uint8ToBase64 } from '$lib/utils';
+import type { TFrontendDoc } from '@patch/lib';
 
-const docStore = writable(AutoMerge.init<PluginDoc>());
+const docStore = writable(AutoMerge.init<TFrontendDoc>());
 const { subscribe, update } = docStore;
 
 let syncState = AutoMerge.initSyncState();
 
-export const sendSyncMessage = (doc: TDoc) => {
+export const sendSyncMessage = (doc: TFrontendDoc) => {
 	const [nextSyncState, syncMessage] = AutoMerge.generateSyncMessage(doc, syncState);
 
 	if (syncMessage) {
@@ -37,7 +37,7 @@ export const recieveSyncMessage = (syncMessage: string) => {
 };
 
 export const document = () => {
-	const change = (changeFn: AutoMerge.ChangeFn<PluginDoc>) =>
+	const change = (changeFn: AutoMerge.ChangeFn<TFrontendDoc>) =>
 		update((doc) => {
 			const newDoc = AutoMerge.change(doc, changeFn);
 

@@ -1,7 +1,8 @@
+import type { TBackendDoc } from '@patch/lib';
 import * as Automerge from '@automerge/automerge';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const initDocument = (initialDoc: Automerge.Doc<any>) => {
+export const initDocument = (initialDoc: Automerge.Doc<TBackendDoc>) => {
 	return Automerge.change(initialDoc, 'Init canvas state', (doc) => {
 		doc.version = new Automerge.Counter(1);
 		doc.name = new Automerge.Text('hello');
@@ -13,8 +14,3 @@ export const initDocument = (initialDoc: Automerge.Doc<any>) => {
 		});
 	});
 };
-
-/**
- * {
- * }
- */

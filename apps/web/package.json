@@ -18,14 +18,13 @@
 		"lodash": "^4.17.21",
 		"socket.io-client": "^4.5.4",
 		"superjson": "^1.11.0",
-		"trpc-sveltekit": "^3.0.2",
 		"vite-plugin-top-level-await": "^1.2.2",
 		"vite-plugin-wasm": "^3.1.0",
-		"ws": "^8.11.0"
+		"ws": "^8.11.0",
+		"@patch/lib": "*"
 	},
 	"devDependencies": {
 		"@patch/config": "*",
-		"@patch/trpc": "*",
 		"@sveltejs/kit": "next",
 		"@types/lodash": "^4.14.191",
 		"@types/ws": "^8.5.3",
