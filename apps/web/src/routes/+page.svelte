@@ -1,20 +1,6 @@
 <script lang="ts">
 	import Plugin from '$lib/components/plugin.svelte';
-	import { io } from '$lib/io';
-	import { document, sendSyncMessage, recieveSyncMessage } from '$lib/stores/document';
-	import { onMount } from 'svelte';
-
-	const doc = document();
-
-	onMount(() => {
-		io.on('connect', () => {
-			sendSyncMessage($doc);
-		});
-
-		io.on('UPDATE_SYNC_STATE', (data: { syncMessage: string }) => {
-			recieveSyncMessage(data.syncMessage);
-		});
-	});
+	import { doc } from '$lib/stores/doc';
 
 	const changeName = () => {
 		doc.update((doc) => {

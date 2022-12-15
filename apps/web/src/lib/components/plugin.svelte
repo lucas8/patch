@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { document } from '$lib/stores/document';
+	import { doc } from '$lib/stores/doc';
 	import type { TFrontendDocNode } from '@patch/lib';
-
-	const doc = document();
 
 	export let idx: number;
 	export let plugin: TFrontendDocNode;
