@@ -13,3 +13,8 @@ export const initDocument = (initialDoc: Automerge.Doc<any>) => {
 		});
 	});
 };
+
+/**
+ * {
+ * }
+ */

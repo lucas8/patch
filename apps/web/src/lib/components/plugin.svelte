@@ -33,7 +33,7 @@
 <svelte:window on:mouseup={handleMouseup} on:mousemove={handleMousemove} />
 
 <article
-	style="left: {plugin.x}px; top: {plugin.y}px; width: {width}px; height: {height}px"
+	style="transform: translate({plugin.x}px, {plugin.y}px); width: {width}px; height: {height}px"
 	on:mousedown={handleMousedown}
 >
 	<pre>Type: {plugin.type}</pre>

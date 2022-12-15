@@ -33,14 +33,23 @@
 <button on:click={changeName}>change name</button>
 <button on:click={addBlock}>add block</button>
 
-{#if $doc && $doc.nodes && $doc.nodes.length > 0}
-	{#each $doc.nodes as plugin, idx}
-		<Plugin {plugin} {idx} />
-	{/each}
-{/if}
+<div>
+	{#if $doc && $doc.nodes && $doc.nodes.length > 0}
+		{#each $doc.nodes as plugin, idx}
+			<Plugin {plugin} {idx} />
+		{/each}
+	{/if}
+</div>
 
 <style>
 	button {
 		pointer-events: auto;
+	}
+	div {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
 	}
 </style>
