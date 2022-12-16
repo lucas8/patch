@@ -1,6 +1,8 @@
 <script lang="ts">
-	import Plugin from '$lib/components/plugin.svelte';
+	import Connectors from '$lib/components/connectors.svelte';
+	import Group from '$lib/components/group.svelte';
 	import { doc } from '$lib/stores/doc';
+	import { uuid } from '@automerge/automerge';
 
 	const changeName = () => {
 		doc.update((doc) => {
@@ -10,26 +12,31 @@
 
 	const addBlock = () => {
 		doc.update((doc) => {
-			doc.nodes.push({ type: 'plugin', x: 0, y: 0 });
+			doc.nodes.push({ id: uuid(), type: 'group', x: 0, y: 0 });
 		});
 	};
 </script>
 
-<h1>Name: {$doc.name}</h1>
-<button on:click={changeName}>change name</button>
-<button on:click={addBlock}>add block</button>
+<header>
+	<h1>Name: {$doc.name}</h1>
+	<button on:click={changeName}>change name</button>
+	<button on:click={addBlock}>add block</button>
+</header>
 
 <div>
 	{#if $doc && $doc.nodes && $doc.nodes.length > 0}
-		{#each $doc.nodes as plugin, idx}
-			<Plugin {plugin} {idx} />
+		{#each $doc.nodes as node, idx}
+			<Group {node} {idx} />
 		{/each}
 	{/if}
 </div>
 
+<Connectors />
+
 <style>
-	button {
-		pointer-events: auto;
+	header {
+		position: relative;
+		z-index: 10;
 	}
 	div {
 		position: absolute;

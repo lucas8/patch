@@ -1,23 +1,18 @@
-import type { Counter, Int, Text } from '@automerge/automerge';
+import type { Counter } from '@automerge/automerge';
 
-export type TBackendDoc = {
-	version: Counter;
-	name: Text;
-	nodes: Array<{
-		type: Text;
-		x: Int;
-		y: Int;
-	}>;
-};
+export type TNodeTypes = 'group' | 'socket';
 
-export type TFrontendDocNode = {
-	type: 'plugin';
+export type TDocNode = {
+	id: string;
+	type: TNodeTypes;
 	x: number;
 	y: number;
+	nodes?: TDocNode[];
 };
 
-export type TFrontendDoc = {
-	version: number;
+export type TDoc = {
+	id: string;
+	version: Counter;
 	name: string;
-	nodes: TFrontendDocNode[];
+	nodes: TDocNode[];
 };
