@@ -1,5 +1,5 @@
 {
-	"name": "@patch/trpc",
+	"name": "@patch/lib",
 	"version": "1.0.0",
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
@@ -12,14 +12,9 @@
 		"build": "tsup",
 		"lint": "TIMING=1 eslint \"src/**/*.ts\""
 	},
-	"dependencies": {
-		"@patch/db": "*",
-		"@trpc/server": "^10.4.2",
-		"superjson": "^1.11.0",
-		"zod": "^3.19.1"
-	},
+	"dependencies": {},
 	"devDependencies": {
-		"@patch/tsconfig": "*",
+		"@automerge/automerge": "^2.0.1-alpha.2",
 		"eslint": "^8.12.0",
 		"tsup": "^5.11.13"
 	}
