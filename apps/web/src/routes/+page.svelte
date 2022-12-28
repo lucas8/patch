@@ -12,7 +12,13 @@
 
 	const addBlock = () => {
 		doc.update((doc) => {
-			doc.nodes.push({ id: uuid(), type: 'group', x: 0, y: 0 });
+			doc.nodes.push({
+				id: uuid(),
+				type: 'group',
+				x: 0,
+				y: 0,
+				nodes: [{ id: uuid(), type: 'socket', x: 50, y: 10 }]
+			});
 		});
 	};
 </script>

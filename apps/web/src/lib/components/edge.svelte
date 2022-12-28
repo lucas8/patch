@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { tweened } from 'svelte/motion';
 	import { elasticOut } from 'svelte/easing';
-	import type { TDocEdge } from '@patch/lib';
-	import type { edges } from '$lib/stores/connectors';
 
 	const offset = 30;
 
-	export let edge: typeof $edges[0];
+	export let p1x: number;
+	export let p1y: number;
+	export let p2x: number;
+	export let p2y: number;
 
 	let c1x = tweened(0, {
 		duration: 800,
@@ -16,18 +17,6 @@
 		duration: 800,
 		easing: elasticOut
 	});
-
-	// TODO: get diff of change, modify 2nd point according to this delta
-	$: console.log(edge);
-
-	$: ({
-		fromNode: { x: p1x, y: p1y },
-		toNode: { x: p2x, y: p2y }
-	} = edge);
-
-	$: console.log('p1', p1x, p1y);
-
-	$: console.log('p2', p2x, p2y);
 
 	$: theta = Math.atan2(p2y - p1y, p2x - p1x) - Math.PI / 2;
 	$: {

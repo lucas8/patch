@@ -1,13 +1,72 @@
 <script lang="ts">
+	import { doc } from '$lib/stores/doc';
+	import { currentEdge } from '$lib/stores/edges';
+	import { uuid } from '@automerge/automerge';
 	import type { TDocNode } from '@patch/lib';
+	import Draggable from './draggable.svelte';
 
 	export let parent: TDocNode;
 	export let node: TDocNode;
+
+	let isDragging = false;
+	let p2x = 0;
+	let p2y = 0;
+
+	$: p1x = parent.x + node.x + 25;
+	$: p1y = parent.y + node.y + 50;
+
+	const onUpdatePosition = (e: CustomEvent<MouseEvent>) => {
+		if (isDragging) {
+			p2x = e.detail.clientX - p1x;
+			p2y = e.detail.clientY - p1y;
+
+			if (node && node.id) {
+				currentEdge.set({ p1x, p1y, p2x, p2y, socketId: node.id, nodeId: parent.id });
+			}
+		}
+	};
+
+	$: console.log($currentEdge);
+
+	const windowHandleMouseUp = () => {
+		isDragging = false;
+
+		if (node && node.id) {
+			currentEdge.set(null);
+		}
+	};
+
+	const localHandleMouseUp = () => {
+		// make sure the current component isn't recieveing the drag event
+		if (!isDragging && $currentEdge !== null) {
+			doc.update((newDoc) => {
+				newDoc.edges.push({
+					id: uuid(),
+					fromNodeId: $currentEdge?.nodeId || '',
+					fromSocketId: $currentEdge?.socketId || '',
+					toSocketId: node.id,
+					toNodeId: parent.id
+				});
+			});
+			currentEdge.set(null);
+		}
+	};
 </script>
 
-<div style="transform: translate({node.x}px, {node.y}px)">
-	<pre>Type: {node.type}</pre>
-</div>
+<Draggable
+	on:updatePosition={onUpdatePosition}
+	handleMouseUp={windowHandleMouseUp}
+	bind:isDragging
+	let:handleMouseDown
+>
+	<div
+		on:mouseup={localHandleMouseUp}
+		on:mousedown={handleMouseDown}
+		style="transform: translate({node.x}px, {node.y}px)"
+	>
+		<pre>Type: {node.type}</pre>
+	</div>
+</Draggable>
 
 <style>
 	div {

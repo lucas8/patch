@@ -1,4 +1,4 @@
-import { derived } from 'svelte/store';
+import { derived, writable } from 'svelte/store';
 import { doc } from '$lib/stores/doc';
 import type { TDoc } from '@patch/lib';
 
@@ -27,3 +27,12 @@ export const edges = derived(doc, ($doc) => {
 		};
 	});
 });
+
+export const currentEdge = writable<{
+	p1x: number;
+	p1y: number;
+	p2x: number;
+	p2y: number;
+	socketId: string;
+	nodeId: string;
+} | null>(null);
