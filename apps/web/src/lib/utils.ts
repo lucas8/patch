@@ -1,3 +1,6 @@
+import { doc } from '$lib/stores/doc';
+import { derived, type Readable } from 'svelte/store';
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const convertDataURIToBinary = (dataURI: any) => {
 	// TODO: refactor
@@ -12,10 +15,11 @@ export const convertDataURIToBinary = (dataURI: any) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const uint8ToBase64 = (arr: Uint8Array) =>
-	btoa(
+export const uint8ToBase64 = (arr: Uint8Array) => {
+	return btoa(
 		Array(arr.length)
 			.fill('')
 			.map((_, i) => String.fromCharCode(arr[i]))
 			.join('')
 	);
+};

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Connectors from '$lib/components/connectors.svelte';
+	import Edges from '$lib/components/edges.svelte';
 	import Group from '$lib/components/group.svelte';
 	import { doc } from '$lib/stores/doc';
 	import { uuid } from '@automerge/automerge';
@@ -31,7 +31,7 @@
 	{/if}
 </div>
 
-<Connectors />
+<Edges />
 
 <style>
 	header {

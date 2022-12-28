@@ -10,9 +10,18 @@ export type TDocNode = {
 	nodes?: TDocNode[];
 };
 
+export type TDocEdge = {
+	id: string;
+	fromNodeId: string;
+	fromSocketId: string;
+	toNodeId: string;
+	toSocketId: string;
+};
+
 export type TDoc = {
 	id: string;
 	version: Counter;
 	name: string;
 	nodes: TDocNode[];
+	edges: TDocEdge[];
 };
