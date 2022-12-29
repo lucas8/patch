@@ -12,13 +12,13 @@
 	let p2x = 0;
 	let p2y = 0;
 
-	$: p1x = parent.x + node.x + 25;
-	$: p1y = parent.y + node.y + 50;
+	$: p1x = parent.x + node.x;
+	$: p1y = parent.y + node.y;
 
 	const onUpdatePosition = (e: CustomEvent<MouseEvent>) => {
 		if (isDragging) {
 			p2x = e.detail.clientX - p1x;
-			p2y = e.detail.clientY - p1y;
+			p2y = e.detail.clientY - p1y - 75;
 
 			if (node && node.id) {
 				currentEdge.set({ p1x, p1y, p2x, p2y, socketId: node.id, nodeId: parent.id });

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Edge from '$lib/components/edge.svelte';
 	import { currentEdge, edges } from '$lib/stores/edges';
+
+	$: console.log($currentEdge);
 </script>
 
 <svg>

@@ -29,21 +29,34 @@
 	<button on:click={addBlock}>add block</button>
 </header>
 
-<div>
-	{#if $doc && $doc.nodes && $doc.nodes.length > 0}
-		{#each $doc.nodes as node, idx}
-			<Group {node} {idx} />
-		{/each}
-	{/if}
-</div>
+<main>
+	<div>
+		{#if $doc && $doc.nodes && $doc.nodes.length > 0}
+			{#each $doc.nodes as node, idx}
+				<Group {node} {idx} />
+			{/each}
+		{/if}
+	</div>
 
-<Edges />
+	<Edges />
+</main>
 
 <style>
+	main {
+		height: 100vh;
+		width: 100%;
+		position: relative;
+		transform-origin: top left;
+		top: 0;
+		left: 0;
+		padding: 0 1rem;
+	}
+
 	header {
 		position: relative;
 		z-index: 10;
 	}
+
 	div {
 		position: absolute;
 		top: 0;
