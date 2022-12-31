@@ -59,8 +59,6 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on('disconnect', function () {
-		console.log('Got disconnect!');
-
 		delete syncStates[peerId];
 	});
 });
