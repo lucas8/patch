@@ -5,8 +5,21 @@ import topLevelAwait from 'vite-plugin-top-level-await';
 /** @type {import('vite').UserConfig} */
 const config = {
 	plugins: [sveltekit(), topLevelAwait(), wasm()],
+	worker: {
+		format: 'es',
+		plugins: [wasm(), topLevelAwait()]
+	},
 	optimizeDeps: {
-		exclude: ['@automerge/automerge-wasm']
+		exclude: [
+			'@automerge/automerge-wasm',
+			'@automerge/automerge-wasm/bundler/bindgen_bg.wasm',
+			'@syntect/wasm'
+		]
+	},
+	server: {
+		fs: {
+			strict: false
+		}
 	}
 };
 

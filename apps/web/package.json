@@ -14,14 +14,18 @@
 	},
 	"dependencies": {
 		"@automerge/automerge": "^2.0.1-alpha.2",
+		"@patch/lib": "*",
 		"@sveltejs/adapter-vercel": "^1.0.0-next.84",
+		"automerge-repo": "^0.0.40",
+		"automerge-repo-network-broadcastchannel": "^0.0.32",
+		"automerge-repo-network-websocket": "^0.0.31",
+		"automerge-repo-storage-localforage": "^0.0.11",
+		"localforage": "^1.10.0",
 		"lodash": "^4.17.21",
-		"socket.io-client": "^4.5.4",
 		"superjson": "^1.11.0",
 		"vite-plugin-top-level-await": "^1.2.2",
 		"vite-plugin-wasm": "^3.1.0",
-		"ws": "^8.11.0",
-		"@patch/lib": "*"
+		"ws": "^8.11.0"
 	},
 	"devDependencies": {
 		"@patch/config": "*",

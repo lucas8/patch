@@ -21,10 +21,14 @@
 			});
 		});
 	};
+
+	$: {
+		// console.log($doc);
+	}
 </script>
 
 <header>
-	<h1>Name: {$doc.name}</h1>
+	<h1>Name: {$doc?.name}</h1>
 	<button on:click={changeName}>change name</button>
 	<button on:click={addBlock}>add block</button>
 </header>

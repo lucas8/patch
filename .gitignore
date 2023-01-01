@@ -40,3 +40,4 @@ yarn-error.log*
 /build
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+.amrg/

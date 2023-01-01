@@ -3,10 +3,13 @@
 	import { currentEdge } from '$lib/stores/edges';
 	import { uuid } from '@automerge/automerge';
 	import type { TDocNode } from '@patch/lib';
+	import { tick } from 'svelte';
 	import Draggable from './draggable.svelte';
 
 	export let parent: TDocNode;
 	export let node: TDocNode;
+
+	let prevNode: any = undefined;
 
 	let isDragging = false;
 	let p2x = 0;
@@ -26,7 +29,7 @@
 		}
 	};
 
-	$: console.log($currentEdge);
+	// $: console.log($currentEdge);
 
 	const windowHandleMouseUp = () => {
 		isDragging = false;
@@ -36,19 +39,22 @@
 		}
 	};
 
-	const localHandleMouseUp = () => {
+	const localHandleMouseUp = async (e: MouseEvent) => {
 		// make sure the current component isn't recieveing the drag event
 		if (!isDragging && $currentEdge !== null) {
-			doc.update((newDoc) => {
-				newDoc.edges.push({
+			// we need to capture the current edge bc the update function will happen
+			// after the currentEdge is set to null
+			prevNode = $currentEdge;
+
+			doc.update((d) => {
+				d.edges.push({
 					id: uuid(),
-					fromNodeId: $currentEdge?.nodeId || '',
-					fromSocketId: $currentEdge?.socketId || '',
+					fromNodeId: prevNode.nodeId,
+					fromSocketId: prevNode.socketId,
 					toSocketId: node.id,
 					toNodeId: parent.id
 				});
 			});
-			currentEdge.set(null);
 		}
 	};
 </script>

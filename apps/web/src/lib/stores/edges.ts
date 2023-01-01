@@ -14,7 +14,7 @@ export const getNodeEdgePositionsById = ($doc: TDoc, nodeId: string, socketId: s
 };
 
 export const edges = derived(doc, ($doc) => {
-	return $doc.edges?.map((edge) => {
+	return $doc?.edges?.map((edge) => {
 		const currToPos = getNodeEdgePositionsById($doc, edge.toNodeId, edge.toSocketId);
 		const currFromPos = getNodeEdgePositionsById($doc, edge.fromNodeId, edge.fromSocketId);
 
