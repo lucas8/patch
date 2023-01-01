@@ -1,64 +1,29 @@
 import { writable } from 'svelte/store';
-import * as AutoMerge from '@automerge/automerge';
-import { io } from '$lib/io';
-import { convertDataURIToBinary, uint8ToBase64 } from '$lib/utils';
+import { repo } from '$lib/repo';
+import type { DocHandleChangeEvent, DocumentId } from 'automerge-repo';
+import type { Doc } from '@automerge/automerge';
 import type { TDoc } from '@patch/lib';
 
-const createDocument = () => {
-	let syncState = AutoMerge.initSyncState();
-	const docStore = writable(AutoMerge.init<TDoc>());
-	const { subscribe, update } = docStore;
+export const useDoc = <T extends TDoc>(docId: string) => {
+	const handle = repo?.find<T>(docId as DocumentId);
+	const { subscribe, set } = writable<Doc<T> | undefined>(undefined);
 
-	const change = (changeFn: AutoMerge.ChangeFn<TDoc>) => {
-		return update((doc) => {
-			const newDoc = AutoMerge.change(doc, changeFn);
+	if (handle) {
+		handle.syncValue().then((v) => set(v));
 
-			sendSyncMessage(newDoc);
+		const listener = (h: DocHandleChangeEvent<T>) => set(h.handle.doc);
+		handle.on('change', listener);
+	}
 
-			return (doc = newDoc);
-		});
+	const change = (fn: (doc: T) => void) => {
+		if (!handle) return;
+		handle.change(fn);
 	};
-
-	const sendSyncMessage = (doc: AutoMerge.Doc<TDoc>) => {
-		const [nextSyncState, syncMessage] = AutoMerge.generateSyncMessage(doc, syncState);
-
-		if (syncMessage) {
-			const b64 = uint8ToBase64(syncMessage);
-
-			io.emit('CLIENT_SYNC', {
-				syncMessage: b64
-			});
-		}
-
-		syncState = nextSyncState;
-		return;
-	};
-
-	io.on('connect', () => {
-		subscribe((doc) => {
-			sendSyncMessage(doc);
-		});
-	});
-
-	io.on('UPDATE_SYNC_STATE', (data: { syncMessage: string }) => {
-		const change = convertDataURIToBinary(data.syncMessage);
-
-		update((doc) => {
-			const [nextDoc, nextSyncState] = AutoMerge.receiveSyncMessage(doc, syncState, change);
-
-			syncState = nextSyncState;
-
-			return (doc = nextDoc);
-		});
-	});
-
-	// TODO: fix hmr
 
 	return {
 		subscribe,
-		update: change,
-		set: () => null
+		update: change
 	};
 };
 
-export const doc = createDocument();
+export const doc = useDoc('09f5b444-ab9f-42b0-bc68-ad10cfe52f33');
