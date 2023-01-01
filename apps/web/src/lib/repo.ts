@@ -8,7 +8,7 @@ export const repo = browser
 	? new Repo({
 			network: [
 				new BroadcastChannelNetworkAdapter(),
-				new BrowserWebSocketClientAdapter('ws://localhost:8080')
+				new BrowserWebSocketClientAdapter(import.meta.env.VITE_APP_WS_URL)
 			],
 			storage: new LocalForageStorageAdapter()
 	  })
