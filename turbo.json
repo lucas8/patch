@@ -15,12 +15,6 @@
 			"dependsOn": ["^build"],
 			"outputs": [".svelte-kit/**", ".vercel/**"]
 		},
-		"db:migrate:deploy": {
-			"outputs": []
-		},
-		"db:push": {
-			"outputs": []
-		},
 		"dev": {
 			"cache": false
 		},
