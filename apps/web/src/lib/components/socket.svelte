@@ -3,7 +3,6 @@
 	import { currentEdge } from '$lib/stores/edges';
 	import { uuid } from '@automerge/automerge';
 	import type { TDocNode } from '@patch/lib';
-	import { tick } from 'svelte';
 	import Draggable from './draggable.svelte';
 
 	export let parent: TDocNode;
@@ -28,8 +27,6 @@
 			}
 		}
 	};
-
-	// $: console.log($currentEdge);
 
 	const windowHandleMouseUp = () => {
 		isDragging = false;

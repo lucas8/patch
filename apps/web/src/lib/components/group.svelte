@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { doc } from '$lib/stores/doc';
 	import type { TDocNode } from '@patch/lib';
 	import Socket from '$lib/components/socket.svelte';
 	import Draggable from './draggable.svelte';
+	import { doc } from '$lib/stores/doc';
 
 	export let idx: number;
 	export let node: TDocNode;
