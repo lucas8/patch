@@ -1,29 +1,33 @@
 import { writable } from 'svelte/store';
-import { repo } from '$lib/repo';
-import type { DocHandleChangeEvent, DocumentId } from 'automerge-repo';
 import type { Doc } from '@automerge/automerge';
 import type { TDoc } from '@patch/lib';
+import { repo } from '$lib/repo';
+import type { DocHandle, DocHandleChangeEvent, DocumentId } from 'automerge-repo';
 
-export const useDoc = <T extends TDoc>(docId: string) => {
-	const handle = repo?.find<T>(docId as DocumentId);
+export const createDocStore = <T extends TDoc>() => {
 	const { subscribe, set } = writable<Doc<T> | undefined>(undefined);
 
-	if (handle) {
-		handle.syncValue().then((v) => set(v));
-
-		const listener = (h: DocHandleChangeEvent<T>) => set(h.handle.doc);
-		handle.on('change', listener);
-	}
+	let handle: DocHandle<T> | null = null;
 
 	const change = (fn: (doc: T) => void) => {
 		if (!handle) return;
+
 		handle.change(fn);
 	};
 
+	const load = (docId: DocumentId) => {
+		handle = repo.find<T>(docId);
+		handle.value().then((v) => set(v));
+
+		const listener = (h: DocHandleChangeEvent<T>) => set(h.handle.doc);
+		handle.on('change', listener);
+	};
+
 	return {
+		load,
 		subscribe,
 		update: change
 	};
 };
 
-export const doc = useDoc('09f5b444-ab9f-42b0-bc68-ad10cfe52f33');
+export const doc = createDocStore();

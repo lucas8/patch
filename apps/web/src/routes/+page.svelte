@@ -1,8 +1,17 @@
 <script lang="ts">
 	import Edges from '$lib/components/edges.svelte';
 	import Group from '$lib/components/group.svelte';
+	import { repo } from '$lib/repo';
 	import { doc } from '$lib/stores/doc';
 	import { uuid } from '@automerge/automerge';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		// load the first document we get (for testing)
+		repo.once('document', (e) => {
+			doc.load(e.handle.documentId);
+		});
+	});
 
 	const changeName = () => {
 		doc.update((doc) => {
@@ -21,10 +30,6 @@
 			});
 		});
 	};
-
-	$: {
-		// console.log($doc);
-	}
 </script>
 
 <header>

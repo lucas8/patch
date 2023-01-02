@@ -32,7 +32,7 @@
 <g>
 	<path
 		fill="none"
-		stroke="rgb(247, 167, 143)"
+		stroke="#4CF367"
 		stroke-width="5"
 		stroke-linecap="round"
 		d="m{p1x},{p1y} q{c1x},{c1y} {p2x},{p2y}"

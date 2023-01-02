@@ -1,6 +1,6 @@
 import { derived, writable } from 'svelte/store';
-import { doc } from '$lib/stores/doc';
 import type { TDoc } from '@patch/lib';
+import { doc } from '$lib/stores/doc';
 
 export const getNodeEdgePositionsById = ($doc: TDoc, nodeId: string, socketId: string) => {
 	const node = $doc.nodes.find((node) => node.id === nodeId);
