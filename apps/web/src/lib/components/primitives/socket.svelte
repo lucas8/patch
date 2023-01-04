@@ -3,7 +3,7 @@
 	import { currentEdge } from '$lib/stores/edges';
 	import { uuid } from '@automerge/automerge';
 	import type { TDocNode } from '@patch/lib';
-	import Draggable from './draggable.svelte';
+	import Draggable from '../draggable.svelte';
 
 	export let parent: TDocNode;
 	export let node: TDocNode;

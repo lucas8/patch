@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Edges from '$lib/components/edges.svelte';
 	import Group from '$lib/components/group.svelte';
+	import Knob from '$lib/components/primitives/knob.svelte';
 	import { repo } from '$lib/repo';
 	import { doc } from '$lib/stores/doc';
 	import { uuid } from '@automerge/automerge';
@@ -26,7 +27,10 @@
 				type: 'group',
 				x: 0,
 				y: 0,
-				nodes: [{ id: uuid(), type: 'socket', x: 50, y: 10 }]
+				nodes: [
+					{ id: uuid(), type: 'socket', x: 50, y: 10 },
+					{ id: uuid(), type: 'knob', value: 0.5, x: 10, y: 80 }
+				]
 			});
 		});
 	};

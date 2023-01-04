@@ -1,12 +1,13 @@
 import type { Counter } from '@automerge/automerge';
 
-export type TNodeTypes = 'group' | 'socket';
+export type TNodeTypes = 'group' | 'socket' | 'knob';
 
 export type TDocNode = {
 	id: string;
 	type: TNodeTypes;
 	x: number;
 	y: number;
+	value?: number;
 	nodes?: TDocNode[];
 };
 
