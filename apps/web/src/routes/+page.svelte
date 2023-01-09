@@ -1,80 +1,30 @@
 <script lang="ts">
-	import Edges from '$lib/components/edges.svelte';
-	import Group from '$lib/components/group.svelte';
-	import Knob from '$lib/components/primitives/knob.svelte';
 	import { repo } from '$lib/repo';
-	import { doc } from '$lib/stores/doc';
-	import { uuid } from '@automerge/automerge';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
+
+	let docIds: string[] = [];
+
+	const listenerFn = (e: any) => {
+		docIds.push(e.handle.documentId);
+		docIds = docIds;
+	};
 
 	onMount(() => {
-		// load the first document we get (for testing)
-		repo.once('document', (e) => {
-			doc.load(e.handle.documentId);
-		});
+		repo.addListener('document', listenerFn);
 	});
 
-	const changeName = () => {
-		doc.update((doc) => {
-			doc.name = 'lucas';
-		});
-	};
-
-	const addBlock = () => {
-		doc.update((doc) => {
-			doc.nodes.push({
-				id: uuid(),
-				type: 'group',
-				x: 0,
-				y: 0,
-				nodes: [
-					{ id: uuid(), type: 'socket', x: 50, y: 10 },
-					{ id: uuid(), type: 'knob', value: 0.5, x: 10, y: 80 }
-				]
-			});
-		});
-	};
+	onDestroy(() => {
+		repo.removeListener('document', listenerFn);
+	});
 </script>
 
-<header>
-	<h1>Name: {$doc?.name}</h1>
-	<button on:click={changeName}>change name</button>
-	<button on:click={addBlock}>add block</button>
-</header>
-
 <main>
-	<div>
-		{#if $doc && $doc.nodes && $doc.nodes.length > 0}
-			{#each $doc.nodes as node, idx}
-				<Group {node} {idx} />
-			{/each}
-		{/if}
-	</div>
-
-	<Edges />
+	<h1>hello world</h1>
+	<ol>
+		{#each docIds as id}
+			<li>
+				<a href="/space/{id}">{id}</a>
+			</li>
+		{/each}
+	</ol>
 </main>
-
-<style>
-	main {
-		height: 100vh;
-		width: 100%;
-		position: relative;
-		transform-origin: top left;
-		top: 0;
-		left: 0;
-		padding: 0 1rem;
-	}
-
-	header {
-		position: relative;
-		z-index: 10;
-	}
-
-	div {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

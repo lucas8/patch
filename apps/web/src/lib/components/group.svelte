@@ -22,8 +22,6 @@
 	const onUpdateValue = (childId: number, newValue: number) => {
 		if (!idx || !childId) return;
 
-		console.log('chaning', newValue);
-
 		doc.update((newDoc) => {
 			newDoc.nodes[idx].nodes![childId].value = newValue;
 		});
