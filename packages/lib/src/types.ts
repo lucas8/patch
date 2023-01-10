@@ -1,28 +1,61 @@
 import type { Counter } from '@automerge/automerge';
 
-export type TNodeTypes = 'group' | 'socket' | 'knob';
+export enum NodeType {
+	KNOB = 'knob',
+	INGRESS = 'ingress',
+	EGRESS = 'egress'
+}
 
-export type TDocNode = {
+interface _Node<C extends Record<string, unknown>> {
 	id: string;
-	type: TNodeTypes;
+	type: NodeType;
+	name: string;
 	x: number;
 	y: number;
-	value?: number;
-	nodes?: TDocNode[];
-};
+	config: C;
+}
 
-export type TDocEdge = {
+export interface KnobNode
+	extends _Node<{
+		min: number;
+		max: number;
+		value: number;
+	}> {
+	type: NodeType.KNOB;
+}
+export interface IngressNode extends _Node<Record<string, never>> {
+	type: NodeType.INGRESS;
+}
+export interface EgressNode extends _Node<Record<string, never>> {
+	type: NodeType.EGRESS;
+}
+
+export type Node = KnobNode | IngressNode | EgressNode;
+
+//** internal document types */
+
+export interface Edge {
 	id: string;
 	fromNodeId: string;
-	fromSocketId: string;
 	toNodeId: string;
+	fromSocketId: string;
 	toSocketId: string;
-};
+}
 
-export type TDoc = {
+export interface Plugin {
+	id: string;
+	name: string;
+	x: number;
+	y: number;
+	width: number;
+	height: number;
+	nodes: Node[];
+}
+
+export interface Document {
 	id: string;
 	version: Counter;
 	name: string;
-	nodes: TDocNode[];
-	edges: TDocEdge[];
-};
+	plugins: Plugin[];
+	edges: Edge[];
+}
