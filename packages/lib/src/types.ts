@@ -6,27 +6,33 @@ export enum NodeType {
 	EGRESS = 'egress'
 }
 
-interface _Node<C extends Record<string, unknown>> {
-	id: string;
-	type: NodeType;
+export type NodeConfig = {
 	name: string;
 	x: number;
 	y: number;
+};
+interface _Node<C extends Record<string, unknown>> extends NodeConfig {
+	id: string;
+	type: NodeType;
 	config: C;
 }
 
-export interface KnobNode
-	extends _Node<{
-		min: number;
-		max: number;
-		value: number;
-	}> {
+// ** public document types */
+
+export type KnobConfig = {
+	min: number;
+	max: number;
+	value: number;
+};
+export interface KnobNode extends _Node<KnobConfig> {
 	type: NodeType.KNOB;
 }
-export interface IngressNode extends _Node<Record<string, never>> {
+export type IngressConfig = Record<string, unknown>;
+export interface IngressNode extends _Node<IngressConfig> {
 	type: NodeType.INGRESS;
 }
-export interface EgressNode extends _Node<Record<string, never>> {
+export type EgressConfig = Record<string, unknown>;
+export interface EgressNode extends _Node<EgressConfig> {
 	type: NodeType.EGRESS;
 }
 
@@ -42,13 +48,16 @@ export interface Edge {
 	toSocketId: string;
 }
 
-export interface Plugin {
-	id: string;
+export type PluginOptions = {
 	name: string;
 	x: number;
 	y: number;
 	width: number;
 	height: number;
+};
+
+export interface Plugin extends PluginOptions {
+	id: string;
 	nodes: Node[];
 }
 

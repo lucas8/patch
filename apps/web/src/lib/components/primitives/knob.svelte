@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { doc } from '$lib/stores/doc';
-	import { type Plugin, type KnobNode, getPlugin, getNode } from '@patch/lib';
+	import { type Plugin, type KnobNode, getNode } from '@patch/lib';
 
 	export let node: KnobNode;
 	export let plugin: Plugin;
 
-	export let RADIUS = 80;
+	export let RADIUS = 40;
 	export let DEGREES = 180;
 
 	const minValue = node.config.min;
@@ -111,7 +111,7 @@
 		position: absolute;
 		width: 10%;
 		height: 10%;
-		bottom: 2%;
+		bottom: 5%;
 		left: 50%;
 		transform: translateX(-50%);
 		border-radius: 50%;

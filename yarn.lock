@@ -7,6 +7,11 @@
   resolved "https://registry.yarnpkg.com/@automerge/automerge-wasm/-/automerge-wasm-0.1.19.tgz#b7712c2d4643e1761b6d8d763432649e2cae138b"
   integrity sha512-G7nBxy5AdewqFRzGw/MyuGSPGElGKWn92CwxzV168RKpteo3Y+kGiDdtYdRi3Q4e6zIFNNhlAeQAizoug4ctHg==
 
+"@automerge/automerge-wasm@0.1.21":
+  version "0.1.21"
+  resolved "https://registry.yarnpkg.com/@automerge/automerge-wasm/-/automerge-wasm-0.1.21.tgz#979ed6505aa270054596533083b71c65363b3699"
+  integrity sha512-hQ6fvhOyDGGeXA1dltLcm1/fsSQfNBhTzUQasts69FYAghyaLNiQnnnCt0E8jCHjezW8eTSIJYww6KqUdgZlRg==
+
 "@automerge/automerge@^2.0.1-alpha.2":
   version "2.0.1-alpha.2"
   resolved "https://registry.yarnpkg.com/@automerge/automerge/-/automerge-2.0.1-alpha.2.tgz#555c40840b73c7b650ba7f6a18289f5ed0c47ca7"
@@ -14,6 +19,14 @@
   dependencies:
     "@automerge/automerge-wasm" "0.1.19"
     uuid "^8.3"
+
+"@automerge/automerge@^2.0.1-alpha.3":
+  version "2.0.1-alpha.3"
+  resolved "https://registry.yarnpkg.com/@automerge/automerge/-/automerge-2.0.1-alpha.3.tgz#989cab5b2a57f5d23d39b36db88b2b93efef514f"
+  integrity sha512-J6ZYkoGxMaPX5xqYxECNwQBAXzvVmImykKXlWlFZHaf2k4bk+VHEIz17p/UjCG43rC73dh02X4nEyUsug+3bSw==
+  dependencies:
+    "@automerge/automerge-wasm" "0.1.21"
+    uuid "^9.0.0"
 
 "@cbor-extract/cbor-extract-darwin-arm64@2.1.1":
   version "2.1.1"
@@ -2784,6 +2797,11 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
+reflect-metadata@^0.1.13:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
+  integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
+
 regexpp@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/regexpp/-/regexpp-3.2.0.tgz#0425a2768d8f23bad70ca4b90461fa2f1213e1b2"
@@ -3481,6 +3499,11 @@ uuid@^8.3, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
+uuid@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.0.tgz#592f550650024a38ceb0c562f2f6aa435761efb5"
+  integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
 
 v8-compile-cache-lib@^3.0.1:
   version "3.0.1"

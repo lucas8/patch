@@ -15,7 +15,6 @@
 	{#if $doc && $doc.plugins && $doc.plugins.length > 0}
 		<div>
 			{#each $doc.plugins as plugin, idx}
-				<h2>{plugin.name}</h2>
 				<Plugin {plugin} />
 			{/each}
 		</div>
