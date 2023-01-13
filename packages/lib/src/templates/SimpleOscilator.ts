@@ -18,8 +18,8 @@ export class SimpleOscilator extends BasePlugin {
 
 	@Egress({ name: 'Sine Wave', x: 10, y: 10 })
 	public sine() {
-		const node = new OscillatorNode(this.context);
-		node.frequency.value = 200 + this.amplitude * 2800;
-		return node;
+		// const node = new OscillatorNode(this.context);
+		// node.frequency.value = 200 + this.amplitude * 2800;
+		// return node;
 	}
 }

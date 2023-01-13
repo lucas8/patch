@@ -24,7 +24,6 @@ export const Knob = (options: NodeConfig & { config: Omit<KnobConfig, 'value'> }
 // TODO: take in type of output
 export const Egress = (options: NodeConfig) => {
 	return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
-		console.log(descriptor);
 		const node = target.constructor;
 		const fields = Reflect.getMetadata('node', node) || [];
 		const field: EgressNode = {
