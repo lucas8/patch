@@ -34,17 +34,18 @@ export const createDocStore = <T extends Document>() => {
 };
 
 export const doc = createDocStore();
+<<<<<<< Updated upstream
+=======
 
 const createInstances = (i: Document) => {
 	return i?.plugins.map((p) => {
 		if (p.templateId) {
-			const t = getTemplate(p.templateId);
+			const tClass = getTemplate(p.templateId);
 
-			if (!t) return;
+			if (!tClass) return;
 
-			const oof = new t(() => get(doc)!);
-
-			return oof;
+			return new tClass(() => get(doc)!);
 		}
 	});
 };
+>>>>>>> Stashed changes

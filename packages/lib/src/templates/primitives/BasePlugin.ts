@@ -1,5 +1,6 @@
 import { Document, Node } from '../../types';
 
+// TODO: hook up event emitter to doc updates
 export abstract class BasePlugin {
 	private _getDoc: () => Document;
 
