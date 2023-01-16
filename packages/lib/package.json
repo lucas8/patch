@@ -12,7 +12,10 @@
 		"build": "tsup",
 		"lint": "TIMING=1 eslint \"src/**/*.ts\""
 	},
-	"dependencies": {},
+	"dependencies": {
+		"@automerge/automerge": "^2.0.1-alpha.3",
+		"reflect-metadata": "^0.1.13"
+	},
 	"devDependencies": {
 		"@automerge/automerge": "^2.0.1-alpha.2",
 		"eslint": "^8.12.0",

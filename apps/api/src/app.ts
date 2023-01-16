@@ -1,9 +1,10 @@
+import 'reflect-metadata';
 import 'dotenv/config';
 import express from 'express';
 import { WebSocketServer } from 'ws';
 import fs from 'fs';
 import { initDocument } from './utils/initDocument';
-import { TDoc } from '@patch/lib';
+import { Document, cloneTemplate, getTemplates } from '@patch/lib';
 
 const wss = new WebSocketServer({ noServer: true });
 
@@ -25,8 +26,13 @@ const wss = new WebSocketServer({ noServer: true });
 
 	const repo = new Repo(config);
 
-	const doc = repo.create();
-	doc.change((doc) => initDocument(doc as TDoc));
+	const doc = repo.create<Document>();
+	doc.change((doc) => {
+		initDocument(doc);
+
+		// Setting up our document with a basic oscilator plugin
+		doc.plugins.push(cloneTemplate('oscilator'));
+	});
 
 	console.log(doc.documentId);
 })();

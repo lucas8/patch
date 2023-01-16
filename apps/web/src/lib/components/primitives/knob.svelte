@@ -1,15 +1,30 @@
 <script lang="ts">
-	export let radius: number = 80;
-	export let degrees: number = 180;
+	import { doc } from '$lib/stores/doc';
+	import { type Plugin, type KnobNode, getNode } from '@patch/lib';
 
-	export let minValue: number = 0;
-	export let maxValue: number = 1;
-	export let value: number = 0.5;
+	export let node: KnobNode;
+	export let plugin: Plugin;
 
-	export let onChange = (value: number) => {};
+	export let RADIUS = 40;
+	export let DEGREES = 180;
 
-	const minAngle = (360 - degrees) / 2;
-	const maxAngle = minAngle + degrees;
+	const minValue = node.config.min;
+	const maxValue = node.config.max;
+
+	$: value = node.config.value;
+
+	const handleChange = (value: number) => {
+		doc.update((newDoc) => {
+			const newNode = getNode(newDoc, plugin.id, node.id);
+
+			if (newNode) {
+				newNode.config.value = value;
+			}
+		});
+	};
+
+	const minAngle = (360 - DEGREES) / 2;
+	const maxAngle = minAngle + DEGREES;
 
 	// this repersents the initial position of the mouse
 	let dragState: undefined | { x: number; y: number } = undefined;
@@ -44,7 +59,7 @@
 
 		const finalAngle = Math.min(Math.max(minAngle, angle), maxAngle);
 
-		onChange(getValueFromDegMap(finalAngle));
+		handleChange(getValueFromDegMap(finalAngle));
 	};
 
 	const handleMouseUp = () => {
@@ -68,7 +83,7 @@
 	bind:this={knobRef}
 	on:mousedown={handleMouseDown}
 	class="knob outer"
-	style:--radius="{radius}px"
+	style:--radius="{RADIUS}px"
 >
 	<div class="knob inner" style="transform:rotate({deg}deg)">
 		<div class="handle" />
@@ -96,7 +111,7 @@
 		position: absolute;
 		width: 10%;
 		height: 10%;
-		bottom: 2%;
+		bottom: 5%;
 		left: 50%;
 		transform: translateX(-50%);
 		border-radius: 50%;

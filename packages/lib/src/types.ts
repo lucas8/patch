@@ -1,28 +1,71 @@
 import type { Counter } from '@automerge/automerge';
 
-export type TNodeTypes = 'group' | 'socket' | 'knob';
+export enum NodeType {
+	KNOB = 'knob',
+	INGRESS = 'ingress',
+	EGRESS = 'egress'
+}
 
-export type TDocNode = {
-	id: string;
-	type: TNodeTypes;
+export type NodeConfig = {
+	name: string;
 	x: number;
 	y: number;
-	value?: number;
-	nodes?: TDocNode[];
 };
+interface _Node<C extends Record<string, unknown>> extends NodeConfig {
+	id: string;
+	type: NodeType;
+	config: C;
+}
 
-export type TDocEdge = {
+// ** public document types */
+
+export type KnobConfig = {
+	min: number;
+	max: number;
+	value: number;
+};
+export interface KnobNode extends _Node<KnobConfig> {
+	type: NodeType.KNOB;
+}
+export type IngressConfig = Record<string, unknown>;
+export interface IngressNode extends _Node<IngressConfig> {
+	type: NodeType.INGRESS;
+}
+export type EgressConfig = Record<string, unknown>;
+export interface EgressNode extends _Node<EgressConfig> {
+	type: NodeType.EGRESS;
+}
+
+export type Node = KnobNode | IngressNode | EgressNode;
+
+//** internal document types */
+
+export interface Edge {
 	id: string;
 	fromNodeId: string;
-	fromSocketId: string;
 	toNodeId: string;
+	fromSocketId: string;
 	toSocketId: string;
+}
+
+export type PluginOptions = {
+	templateId: string;
+	name: string;
+	x: number;
+	y: number;
+	width: number;
+	height: number;
 };
 
-export type TDoc = {
+export interface Plugin extends PluginOptions {
+	id: string;
+	nodes: Node[];
+}
+
+export interface Document {
 	id: string;
 	version: Counter;
 	name: string;
-	nodes: TDocNode[];
-	edges: TDocEdge[];
-};
+	plugins: Plugin[];
+	edges: Edge[];
+}

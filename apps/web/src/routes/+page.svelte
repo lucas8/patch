@@ -23,7 +23,7 @@
 	<ol>
 		{#each docIds as id}
 			<li>
-				<a href="/space/{id}">{id}</a>
+				<a href="/{id}">{id}</a>
 			</li>
 		{/each}
 	</ol>

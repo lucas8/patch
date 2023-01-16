@@ -2,11 +2,11 @@
 	import { doc } from '$lib/stores/doc';
 	import { currentEdge } from '$lib/stores/edges';
 	import { uuid } from '@automerge/automerge';
-	import type { TDocNode } from '@patch/lib';
+	import type { Node, Plugin } from '@patch/lib';
 	import Draggable from '../draggable.svelte';
 
-	export let parent: TDocNode;
-	export let node: TDocNode;
+	export let plugin: Plugin;
+	export let node: Node;
 
 	let prevNode: any = undefined;
 
@@ -14,8 +14,8 @@
 	let p2x = 0;
 	let p2y = 0;
 
-	$: p1x = parent.x + node.x;
-	$: p1y = parent.y + node.y;
+	$: p1x = plugin.x + node.x;
+	$: p1y = plugin.y + node.y;
 
 	const onUpdatePosition = (e: CustomEvent<MouseEvent>) => {
 		if (isDragging) {
@@ -23,7 +23,7 @@
 			p2y = e.detail.clientY - p1y - 75;
 
 			if (node && node.id) {
-				currentEdge.set({ p1x, p1y, p2x, p2y, socketId: node.id, nodeId: parent.id });
+				currentEdge.set({ p1x, p1y, p2x, p2y, socketId: node.id, nodeId: plugin.id });
 			}
 		}
 	};
@@ -49,7 +49,7 @@
 					fromNodeId: prevNode.nodeId,
 					fromSocketId: prevNode.socketId,
 					toSocketId: node.id,
-					toNodeId: parent.id
+					toNodeId: plugin.id
 				});
 			});
 		}
