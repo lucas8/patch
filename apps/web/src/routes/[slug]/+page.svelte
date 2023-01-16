@@ -1,17 +1,13 @@
 <script lang="ts">
 	import Plugin from '$lib/components/plugin.svelte';
 	import { doc } from '$lib/stores/doc';
-	import { getTemplate } from '@patch/lib';
 	import { onMount } from 'svelte';
-	import { get } from 'svelte/store';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
 	onMount(() => {
 		doc.load(data.slug as any);
-
-		console.log();
 	});
 </script>
 

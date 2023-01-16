@@ -1,18 +1,17 @@
-import { Document } from '../../types';
+import { Document, Node } from '../../types';
 
 export abstract class BasePlugin {
-	// getValue: (doc: (doc: Document) => any) => any = () => 0;
-	private getDoc: () => Document;
+	private _getDoc: () => Document;
 
-	get doc() {
-		return this.getDoc();
+	public getNode<T extends Node>(templateId: string, nodeId: string): T | undefined {
+		const doc = this._getDoc();
+
+		return doc.plugins
+			?.find((p) => p.templateId === templateId)
+			?.nodes?.find((k) => k.id === nodeId) as T;
 	}
 
-	// constructor(getValue: (doc: (doc: Document) => any) => any) {
-	// 	this.getValue = getValue;
-	// }
-
-	constructor(getDoc: () => Document) {
-		this.getDoc = getDoc;
+	protected constructor(getDoc: () => Document) {
+		this._getDoc = getDoc;
 	}
 }

@@ -1,3 +1,4 @@
+import { KnobNode } from '../types';
 import { Plugin, Knob, BasePlugin } from './primitives';
 
 @Plugin({ templateId: 'oscilator', name: 'Simple Oscilator', width: 100, height: 100, x: 0, y: 0 })
@@ -12,12 +13,8 @@ export class SimpleOscilator extends BasePlugin {
 			value: 51
 		}
 	})
-	public get amplitude(): any {
-		// return doc;
-		// get value from document
-		return this.doc.plugins
-			?.find((p) => p.templateId === 'oscilator')
-			?.nodes?.find((k) => k.id === 'amplitude')?.config?.value;
+	public get amplitude(): number | undefined {
+		return this.getNode<KnobNode>('oscilator', 'amplitude')?.config?.value;
 	}
 
 	// @Ingress({ name: 'Frequency', x: 10, y: 10 })
