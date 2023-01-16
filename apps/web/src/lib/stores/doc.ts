@@ -34,8 +34,6 @@ export const createDocStore = <T extends Document>() => {
 };
 
 export const doc = createDocStore();
-<<<<<<< Updated upstream
-=======
 
 const createInstances = (i: Document) => {
 	return i?.plugins.map((p) => {
@@ -48,4 +46,3 @@ const createInstances = (i: Document) => {
 		}
 	});
 };
->>>>>>> Stashed changes
