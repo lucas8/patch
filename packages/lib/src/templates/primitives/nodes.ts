@@ -1,10 +1,8 @@
 import { EgressNode, KnobConfig, KnobNode, NodeConfig, NodeType } from '../..';
 
-export const Knob = (options: NodeConfig & { config: Omit<KnobConfig, 'value'> }) => {
+export const Knob = (options: NodeConfig & { config: KnobConfig }) => {
 	return (target: any, propertyKey: string) => {
 		const { config } = options;
-
-		const initialValue = new target.constructor()[propertyKey] ?? 0;
 
 		const node = target.constructor;
 		const fields = Reflect.getMetadata('node', node) || [];
@@ -14,7 +12,7 @@ export const Knob = (options: NodeConfig & { config: Omit<KnobConfig, 'value'> }
 			name: options.name,
 			x: options.x,
 			y: options.y,
-			config: { value: initialValue, ...config }
+			config
 		};
 
 		Reflect.defineMetadata('node', [...fields, field], node);

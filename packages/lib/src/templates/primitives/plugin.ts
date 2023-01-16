@@ -4,8 +4,8 @@ export const Plugin = (options: PluginOptions): ClassDecorator => {
 	return (target: any) => {
 		const plugin = target.prototype;
 		const field: Omit<PluginType, 'id'> = {
-			nodes: [],
-			...options
+			...options,
+			nodes: []
 		};
 
 		Reflect.defineMetadata('plugin', field, plugin);

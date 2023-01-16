@@ -49,6 +49,7 @@ export interface Edge {
 }
 
 export type PluginOptions = {
+	templateId: string;
 	name: string;
 	x: number;
 	y: number;

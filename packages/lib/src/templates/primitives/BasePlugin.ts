@@ -1,10 +1,18 @@
-// type Context = AudioContext;
-type Context = any;
+import { Document } from '../../types';
 
 export abstract class BasePlugin {
-	context: Context;
+	// getValue: (doc: (doc: Document) => any) => any = () => 0;
+	private getDoc: () => Document;
 
-	constructor(context: Context) {
-		this.context = context;
+	get doc() {
+		return this.getDoc();
+	}
+
+	// constructor(getValue: (doc: (doc: Document) => any) => any) {
+	// 	this.getValue = getValue;
+	// }
+
+	constructor(getDoc: () => Document) {
+		this.getDoc = getDoc;
 	}
 }
