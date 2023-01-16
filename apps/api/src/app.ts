@@ -4,7 +4,7 @@ import express from 'express';
 import { WebSocketServer } from 'ws';
 import fs from 'fs';
 import { initDocument } from './utils/initDocument';
-import { Document, cloneTemplate } from '@patch/lib';
+import { Document, cloneTemplate, getTemplates } from '@patch/lib';
 
 const wss = new WebSocketServer({ noServer: true });
 
