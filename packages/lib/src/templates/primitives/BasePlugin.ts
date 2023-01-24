@@ -12,7 +12,7 @@ export abstract class BasePlugin {
 			?.nodes?.find((k) => k.id === nodeId) as T;
 	}
 
-	protected constructor(getDoc: () => Document) {
+	constructor(getDoc: () => Document) {
 		this._getDoc = getDoc;
 	}
 }

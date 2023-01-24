@@ -1,8 +1,9 @@
-import { get, writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 import type { Doc } from '@automerge/automerge';
-import { type Document, getTemplate } from '@patch/lib';
+import type { Document } from '@patch/lib';
 import { repo } from '$lib/repo';
 import type { DocHandle, DocHandleChangeEvent, DocumentId } from 'automerge-repo';
+import { audioManager } from '$lib/audio';
 
 export const createDocStore = <T extends Document>() => {
 	const { subscribe, set } = writable<Doc<T> | undefined>(undefined);
@@ -18,7 +19,8 @@ export const createDocStore = <T extends Document>() => {
 	const load = (docId: DocumentId) => {
 		handle = repo.find<T>(docId);
 		handle.value().then((v) => {
-			console.log(createInstances(v));
+			audioManager?.createPluginInstances(v.plugins);
+
 			return set(v);
 		});
 
@@ -34,15 +36,3 @@ export const createDocStore = <T extends Document>() => {
 };
 
 export const doc = createDocStore();
-
-const createInstances = (i: Document) => {
-	return i?.plugins.map((p) => {
-		if (p.templateId) {
-			const tClass = getTemplate(p.templateId);
-
-			if (!tClass) return;
-
-			return new tClass(() => get(doc)!);
-		}
-	});
-};

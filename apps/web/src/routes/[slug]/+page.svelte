@@ -14,7 +14,7 @@
 <main>
 	{#if $doc && $doc.plugins && $doc.plugins.length > 0}
 		<div>
-			{#each $doc.plugins as plugin, idx}
+			{#each $doc.plugins as plugin}
 				<Plugin {plugin} />
 			{/each}
 		</div>
