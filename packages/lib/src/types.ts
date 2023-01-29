@@ -44,8 +44,8 @@ export interface Edge {
 	id: string;
 	fromNodeId: string;
 	toNodeId: string;
-	fromSocketId: string;
-	toSocketId: string;
+	fromPluginId: string;
+	toPluginId: string;
 }
 
 export type PluginOptions = {
@@ -55,6 +55,7 @@ export type PluginOptions = {
 	y: number;
 	width: number;
 	height: number;
+	backgroundColor: string;
 };
 
 export interface Plugin extends PluginOptions {

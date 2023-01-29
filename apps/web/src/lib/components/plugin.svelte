@@ -25,7 +25,11 @@
 <Draggable bind:isDragging let:handleMouseDown on:updatePosition={onUpdatePosition}>
 	<article style="transform: translate({plugin.x}px, {plugin.y}px)" on:mousedown={handleMouseDown}>
 		<pre>{plugin.name}</pre>
-		<div style:--width="{plugin.width}px" style:--height="{plugin.height}px">
+		<div
+			style:background-color={plugin.backgroundColor}
+			style:--width="{plugin.width}px"
+			style:--height="{plugin.height}px"
+		>
 			{#if plugin.nodes && plugin.nodes.length > 0}
 				{#each plugin.nodes as node}
 					<Node {node} {plugin} />
@@ -41,7 +45,6 @@
 		user-select: none;
 	}
 	div {
-		background-color: dodgerblue;
 		width: var(--width);
 		height: var(--height);
 	}

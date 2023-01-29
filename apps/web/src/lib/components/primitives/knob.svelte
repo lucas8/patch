@@ -84,13 +84,19 @@
 	on:mousedown={handleMouseDown}
 	class="knob outer"
 	style:--radius="{RADIUS}px"
+	style="transform: translate({node.x}px, {node.y}px)"
 >
+	<pre>{Math.round(value * 10) / 10}</pre>
 	<div class="knob inner" style="transform:rotate({deg}deg)">
 		<div class="handle" />
 	</div>
 </div>
 
 <style>
+	pre {
+		position: absolute;
+		top: -20px;
+	}
 	.knob {
 		display: flex;
 		position: relative;

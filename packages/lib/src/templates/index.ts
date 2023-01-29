@@ -1,8 +1,9 @@
 import { Plugin, Node } from '../types';
 import { SimpleOscilator } from './SimpleOscilator';
 import { uuid } from '@automerge/automerge';
+import { SimpleFilter } from './SimpleFilter';
 
-const templates = [SimpleOscilator];
+const templates = [SimpleOscilator, SimpleFilter];
 
 const getTemplates = (): Array<Plugin> => {
 	return templates.reduce((prev, templateFn) => {
@@ -14,10 +15,15 @@ const getTemplates = (): Array<Plugin> => {
 	}, [] as Array<Plugin>);
 };
 
-export const cloneTemplate = (id: keyof typeof templates) => {
+export const cloneTemplate = (id: string): Plugin | undefined => {
 	const plugins = getTemplates();
 	const template = plugins.find((t) => t.templateId === id);
 
+	if (!template) {
+		return undefined;
+	}
+
+	// TODO: really bad to create the id here
 	return { ...template, id: uuid() };
 };
 

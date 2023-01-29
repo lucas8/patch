@@ -1,4 +1,4 @@
-import { EgressNode, KnobConfig, KnobNode, NodeConfig, NodeType } from '../..';
+import { EgressNode, IngressNode, KnobConfig, KnobNode, NodeConfig, NodeType } from '../..';
 
 export const Knob = (options: NodeConfig & { config: KnobConfig }) => {
 	return (target: any, propertyKey: string) => {
@@ -27,6 +27,23 @@ export const Egress = (options: NodeConfig) => {
 		const field: EgressNode = {
 			id: propertyKey,
 			type: NodeType.EGRESS,
+			name: options.name,
+			x: options.x,
+			y: options.y,
+			config: {}
+		};
+
+		Reflect.defineMetadata('node', [...fields, field], node);
+	};
+};
+
+export const Ingress = (options: NodeConfig) => {
+	return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+		const node = target.constructor;
+		const fields = Reflect.getMetadata('node', node) || [];
+		const field: IngressNode = {
+			id: propertyKey,
+			type: NodeType.INGRESS,
 			name: options.name,
 			x: options.x,
 			y: options.y,

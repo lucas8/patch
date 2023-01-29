@@ -14,16 +14,16 @@
 	let p2x = 0;
 	let p2y = 0;
 
-	$: p1x = plugin.x + node.x;
-	$: p1y = plugin.y + node.y;
+	$: p1x = plugin.x + node.x + 25;
+	$: p1y = plugin.y + node.y + 75;
 
 	const onUpdatePosition = (e: CustomEvent<MouseEvent>) => {
 		if (isDragging) {
 			p2x = e.detail.clientX - p1x;
-			p2y = e.detail.clientY - p1y - 75;
+			p2y = e.detail.clientY - p1y;
 
 			if (node && node.id) {
-				currentEdge.set({ p1x, p1y, p2x, p2y, socketId: node.id, nodeId: plugin.id });
+				currentEdge.set({ p1x, p1y, p2x, p2y, nodeId: node.id, pluginId: plugin.id });
 			}
 		}
 	};
@@ -46,10 +46,10 @@
 			doc.update((d) => {
 				d.edges.push({
 					id: uuid(),
+					fromPluginId: prevNode.pluginId,
 					fromNodeId: prevNode.nodeId,
-					fromSocketId: prevNode.socketId,
-					toSocketId: node.id,
-					toNodeId: plugin.id
+					toPluginId: plugin.id,
+					toNodeId: node.id
 				});
 			});
 		}
